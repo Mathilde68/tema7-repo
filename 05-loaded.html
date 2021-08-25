@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html selector</title>
+
+    <style>
+        body {
+            margin: auto;
+        }
+
+        main {
+            margin: 10px;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 20px;
+
+        }
+
+        img {
+            width: 100%;
+        }
+
+        article {
+            border: 1px solid rgb(17, 16, 16);
+        }
+
+        header,
+        footer {
+            text-align: center;
+            border: 1px solid rgb(17, 16, 16);
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Titel</h1>
+    </header>
+
+    <main>
+        <h2>Undertitel</h2>
+        <section>
+
+            <article id="article1">
+                <img src="https://placeimg.com/640/480/any" alt="">
+                <h3>Article 1</h3>
+                <p>Gate keepers of hell. Pet me pet me don't pet me favor packaging over toy jump off balcony, onto
+                    stranger's head and blow up sofa in 3 seconds. Open the door, let me out, you are doin me a concern,
+                    heckin angery woofer pats most angery pupper I have ever seen. Much ruin diet dat tungg tho I am
+                    bekom fat heckin good boys and girls doge what a nice floof,
+                    boofers very taste wow heckin good boys many pats. long bois. Big ol woofer lotsa pats puggo
+                    shooberino bork, very good spot he made many woofs very good spot heckin good boys. Wow such tempt
+                    wow very biscit big ol pupper fluffer long water shoob smol ruff, blep pats adorable doggo puggorino
+                    smol. Very taste wow you are doin me a concern bork lotsa pats, what a nice floof. Heckin long water
+                    shoob very good spot long water shoob yapper vvv, such treat vvv shoob corgo. Ruff fat boi big ol
+                    borkf noodle horse mlem lotsa pats boofers, very good spot stop it fren smol very jealous pupper
+                    doggorino. Heckin good boys fat boi he made many woofs extremely cuuuuuute, ur givin me a spook
+                    yappe</p>
+            </article>
+            <article id="article2">
+                <img src="https://placeimg.com/640/480/nature" alt="">
+                <h3>Article 2</h3>
+                <p>Pats you are doing me the shock very good spot shoob length boy dat tungg tho long bois lotsa pats
+                    adorable doggo, h*ck very taste wow wrinkler shooberino shoober wrinkler. Yapper what a nice floof
+                    doggorino much ruin diet extremely cuuuuuute, shooberino shoober. Wrinkler tungg shoob long water
+                    shoob doing me a frighten long woofer, heckin good boys doggo the neighborhood pupper yapper. such
+                    treat. Ruff waggy wags very hand that feed shibe many pats, vvv. Fluffer puggorino you are doin me a
+                    concern heckin angery woofer heckin good boys and girls waggy wags, bork fluffer puggorino length
+                    boy. Puggo shooberino floofs most angery pupper I have ever seen you are doing me the shock, wow
+                    very biscit blop wow very biscit.
+
+                </p>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>This is a footer</p>
+    </footer>
+
+    <script>
+
+        const section = document.querySelector("section");
+        const titel = document.querySelector("h1");
+        console.log(titel);
+
+        const undertitel = document.querySelector("h2");
+        console.log(undertitel);
+
+        //article 1.....
+        const article1 = document.querySelector("article");
+        console.log(article1);
+
+        const underoverskrift1 = document.querySelector("h3");
+        console.log(underoverskrift1);
+
+        const img1 = document.querySelector("img");
+        console.log(img1);
+
+        const p1 = document.querySelector("p");
+        console.log(p1);
+
+
+        //article 2.......
+        const article2 = document.querySelector("article + article");
+        console.log(article2);
+
+        const underoverskrift2 = document.querySelector("article + article h3");
+        console.log(underoverskrift2);
+
+        const img2 = document.querySelector("article:nth-child(2) img");
+        console.log(img2);
+
+        const p2 = document.querySelector("article:nth-child(2) p");
+        console.log(p2);
+
+
+
+        document.addEventListener("DOMContentLoaded", nytIndhold);
+
+function nytIndhold(){
+    console.log("dom is loaded - change content");
+
+//replace text and img of article 1 and 2..........
+        titel.textContent = "Completely new title";
+        undertitel.textContent="What are those two?";
+        underoverskrift1.innerHTML = "Whats this animal right here?";
+        underoverskrift2.innerHTML = "Whats that animal right there?";
+
+        p1.innerHTML = "Grunt in turkey coo, windmill at bull. Goose hammers cattle rats in crows. Mooo cat daisys,grunt in turkey coo, windmill at bull. Quack hammers eggplant is utters nails garden. Peacocks baa ostrichesowls. Mooo cat daisys, grunt in turkey coo, windmill at bull. Hoot squea.Moose quack, crows doggies frogs crickets chirp. Lamb pig rooster sheep. Ewes mushrooms zucchini in forage Harvester at sheep with tractor. Hoot squeal moose quack, crows doggies frogs crickets chirp. Peacocks baaostriches owls. Augers oats hen cowpies. In eggplant, quonset is grain bins, grain trucks quonset pole shed."
+
+        img1.src="https://placeimg.com/500/250/animals";
+        img2.src="https://placeimg.com/600/300/animals";
+
+        img1.alt="this is an animal";
+        img2.alt="this is also a lil animal";
+
+        // add new article-...............
+        let newArticle = document.createElement("article");
+        section.appendChild(newArticle);
+     let article3 =document.querySelector("article:nth-child(3)");
+
+        article3.innerHTML += "<img src=\"https://placeimg.com/400/200/nature\">";
+        article3.innerHTML += "<h3>This is not an animal?</h3>";
+        article3.innerHTML +="<p>Pats you are doing me the shock very good spot shoob length boy dat tungg tho long bois lotsa patsadorable doggo, h*ck very taste wow wrinkler shooberino shoober wrinkler. Yapper what a nice floof </p>";
+
+}
+
+
+    </script>
+
+</body>
+
+</html>
