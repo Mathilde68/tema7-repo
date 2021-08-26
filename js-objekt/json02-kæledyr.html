@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kæledyr</title>
+
+    <style>
+
+        article{
+            border: 5px solid rgb(65, 47, 47);
+            background-color:burlywood;
+            margin:10px;
+        }
+
+        p, ul, h3{
+            color:rgb(65, 47, 47);
+            font-family:monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container"></section>
+    <template>
+        <article>
+            <h3></h3>
+            <p></p>
+            <p></p>
+            <!--- <p>Foder:</p>-->
+            <ul></ul>
+        </article>
+    </template>
+
+    <script>
+        let section = document.querySelector(".container")
+        let dyrTemplate = document.querySelector("template");
+
+        const fil = "kæledyr.json";
+
+
+        async function hentData(fil) {
+            const result = await fetch(fil);
+            const json = await result.json();
+
+            visDyr(json);
+        }
+
+        document.addEventListener('DOMContentLoaded', visDyr);
+
+        function visDyr(kæledyr) {
+
+            console.log("vis dyr virker");
+
+            kæledyr.forEach(kæledyr => {
+
+                let templateKlon = dyrTemplate.cloneNode(true).content;
+
+                templateKlon.querySelector("h3").textContent = kæledyr.dyr;
+                templateKlon.querySelector("p").textContent = `Art: ${kæledyr.art}`;
+                templateKlon.querySelector("p:nth-child(3)").textContent = `Levetid: ${kæledyr.levetid}`;
+                templateKlon.innerHTML += " <p>Foder:</p>";
+                
+                kæledyr.foder.forEach(foder => {
+                    templateKlon.querySelector("ul").innerHTML += "<li>" + foder + "</li>";
+                });
+                section.appendChild(templateKlon);
+            });
+        }
+hentData(fil);
+
+    </script>
+</body>
+
+</html>

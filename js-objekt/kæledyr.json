@@ -1,0 +1,19 @@
+[{
+    "dyr": "Nymfeparakit",
+    "art": "Lille papegøje",
+    "levetid": "25 år",
+    "foder": ["frø","grønt","frugt"]
+        },
+{
+    "dyr": "Marsvin",
+    "art": "Gnaver",
+    "levetid": "8 år",
+    "foder": ["hø","foderpiller","grønt"]
+        },
+{
+    "dyr": "Kat",
+    "art": "Rovdyr/Kattedyr",
+    "levetid": "1 år",
+    "foder": ["kød","fisk"]
+        }
+    ]
