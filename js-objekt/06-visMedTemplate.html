@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <style>
+
+  article {
+            border: 3px dotted #6b69da;
+            margin: 10px;
+            padding-left: 10px;
+        }
+
+
+  </style>
+</head>
+
+<body>
+  <section class="container"></section>
+  <template>
+    <article>
+      <h3></h3>
+      <img src="" alt="">
+      <p></p>
+      <p></p>
+    </article>
+  </template>
+
+  <script>
+    let article = document.querySelector("article");
+    let dyr = [
+      {
+        navn: "Gris",
+        type: "pattedyr",
+        billede: "http://mabe-kea.dk/E19/pics/pig.png",
+        levested: "en gård",
+      },
+      {
+        navn: "Frø",
+        type: "amfibie",
+        billede: "http://mabe-kea.dk/E19/pics/frog.png",
+        levested: "vandhuller",
+      },
+      {
+        navn: "Ræv",
+        type: "pattedyr",
+        billede: "http://mabe-kea.dk/E19/pics/fox.png",
+        levested: "skoven",
+      },
+      {
+        navn: "Sild",
+        type: "fisk",
+        billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+        levested: "havet",
+      },
+      {
+        navn: "Krokodille",
+        type: "krybdyr",
+        billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+        levested: "floden",
+      },
+    ];
+
+    document.addEventListener("DOMContentLoaded", start);
+
+    function start() {
+      const container = document.querySelector(".container");
+      const dyrTemplate = document.querySelector("template");
+      dyr.forEach(dyr => {
+        let templateKlon = dyrTemplate.cloneNode(true).content;
+
+        templateKlon.querySelector("h3").textContent = dyr.navn;
+        templateKlon.querySelector("img").src = dyr.billede;
+        templateKlon.querySelector("p").textContent = `Type: ${dyr.type}`;
+        templateKlon.querySelector("p:nth-child(4)").textContent = `Levested: ${dyr.levested}`;
+        container.appendChild(templateKlon);
+
+      });
+    }
+  </script>
+</body>
+
+</html>
