@@ -5,12 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babushka</title>
+    <title>Bistro Babushka</title>
+    <style>
+        img {
+            width: 100%;
+        }
+
+        #menuen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 1.5rem;
+            padding: 2rem;
+            margin: auto;
+            max-width: 1400px;
+        }
+
+        .valgt{
+            background-color: coral;
+        }
+    </style>
 </head>
 
 <body>
- 
+    <section id="filtersection">
+        <h2 id="filterNavn">Alle retter</h2>
+        <nav id="filter">
+            <button data-kategori="alle" class="knap valgt">Alle retter</button>
+            <button data-kategori="forretter" class="knap">Forretter</button>
+            <button data-kategori="hovedretter" class="knap">Hovedretter</button>
+            <button data-kategori="sideorders" class="knap">Sideordre</button>
+            <button data-kategori="desserter" class="knap">Desserter</button>
+            <button data-kategori="drikkevarer" class="knap">Drikkevarer</button>
+        </nav>
 
+    </section>
     <section id="menuen"></section>
 
     <template>
@@ -25,6 +53,9 @@
     </template>
 
     <script>
+        let retter;
+        const aktivFilter = document.querySelector("#filterNavn");
+        let filter = "alle"
 
 
         //url til restdb 
@@ -50,7 +81,29 @@
         document.addEventListener("DOMContentLoaded", start)
 
         function start() {
+            // eventlistener for filterknapper
+            const filterKnapper = document.querySelectorAll("#filter button");
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerMenu));
+            //henter json data
             hentData();
+        }
+
+
+        function filtrerMenu() {
+            //viser det aktive filter i console
+            console.log(this.textContent);
+
+        //  //sætter filters værdi lig med værdien fra data af den knap der førte ind i funktionen
+            filter = this.dataset.kategori;
+            //ændrer overskriften
+            aktivFilter.textContent = this.textContent;
+
+            //fjerner oog tilføjer valgt class til den rigtige knap
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt");
+
+            //kalder function vis retter efter det nye filter er sat
+            visRetter();
         }
 
 
@@ -59,18 +112,21 @@
             // variabler for indholdets destination og templaten
             const destination = document.querySelector("#menuen");
             let template = document.querySelector("template");
-
+// rydder indholdet af sektionen så der er plads til det nye indhold efter filtrering)
             destination.textContent = "";
 
             retter.forEach(ret => {
+// if conditionen tjekker for filter og looper derefter igennem det tilsvarende indhold
+                if (filter == ret.kategori || filter == "alle") {
 
-                const klon = template.cloneNode(true).content;
-                klon.querySelector(".navn").textContent = ret.navn;
-                klon.querySelector("img").src = medieurl + ret.billednavn + "-md.jpg";
-                klon.querySelector(".pris").textContent = ret.pris;
-                klon.querySelector(".beskrivelse").textContent = ret.kortbeskrivelse;
+                    const klon = template.cloneNode(true).content;
+                    klon.querySelector(".navn").textContent = ret.navn;
+                    klon.querySelector("img").src = medieurl + ret.billednavn + "-md.jpg";
+                    klon.querySelector(".pris").textContent = ret.pris;
+                    klon.querySelector(".beskrivelse").textContent = ret.kortbeskrivelse;
 
-                destination.appendChild(klon);
+                    destination.appendChild(klon);
+                }
 
             });
 
