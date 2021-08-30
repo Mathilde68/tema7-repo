@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Babushka</title>
 </head>
+
 <body>
+ 
 
     <section id="menuen"></section>
 
@@ -20,15 +23,61 @@
             </div>
         </article>
     </template>
-    
+
     <script>
-const destination = document.querySelector("#menuen");
-let template = document.querySelector("template");
 
-const url= 
 
+        //url til restdb 
+        const url = "https://babushka-dd8a.restdb.io/rest/menu";
+        const medieurl = "media/";
+
+        //options, til at indheolde api key og videregi til headers
+        const options = {
+            headers: {
+                'x-apikey': "600ec2fb1346a1524ff12de4"
+            }
+        }
+        // asynkron function som afventer og indhenter json data fra restdb
+        async function hentData() {
+            const jsonData = await fetch(url, options);
+            retter = await jsonData.json();
+            console.log(retter);
+            visRetter(retter);
+        }
+
+
+        //tjekker for om dommen er loaded, kalder derefter start function
+        document.addEventListener("DOMContentLoaded", start)
+
+        function start() {
+            hentData();
+        }
+
+
+
+        function visRetter() {
+            // variabler for indholdets destination og templaten
+            const destination = document.querySelector("#menuen");
+            let template = document.querySelector("template");
+
+            destination.textContent = "";
+
+            retter.forEach(ret => {
+
+                const klon = template.cloneNode(true).content;
+                klon.querySelector(".navn").textContent = ret.navn;
+                klon.querySelector("img").src = medieurl + ret.billednavn + "-md.jpg";
+                klon.querySelector(".pris").textContent = ret.pris;
+                klon.querySelector(".beskrivelse").textContent = ret.kortbeskrivelse;
+
+                destination.appendChild(klon);
+
+            });
+
+        }
 
     </script>
-    
+
 </body>
+
 </html>
