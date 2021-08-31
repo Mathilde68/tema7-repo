@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persongalleri</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 5px;
+            background-color: rgb(200, 222, 224);
+        }
+
+        article {
+            border-radius: 8px 8px 8px 8px;
+            margin: 10px;
+            background-color: rgb(36, 41, 46);
+
+        }
+
+        h1 {
+            font-family: 'Franklin Gothic Medium';
+            font-size: 1.8rem;
+            text-align: center;
+            align-self: center;
+            color: #1a4758;
+        }
+
+
+        h2 {
+            font-family: 'Franklin Gothic Medium';
+            font-size: 1.8rem;
+            text-align: center;
+            color: rgb(200, 222, 224);
+        }
+
+        p {
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            padding-left: 20px;
+            color: #9ec5d4;
+            margin:4px;
+        }
+
+        img {
+            padding-top: 4px;
+            width: 100%;
+        }
+
+        nav {
+            background-color: rgb(200, 222, 224);
+            text-align: center;
+            padding: 15px;
+        }
+
+        button {
+            border: none;
+            background-color: #e7e7e7;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .valgt {
+            background-color: #9ec5d4;
+        }
+
+        #filteroverskrift {
+            font-size: 1.5rem;
+            color: #9ec5d4;
+
+        }
+
+
+        #popup {
+            overflow-y: scroll;
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(19, 19, 26, 0.856);
+            
+        }
+
+        #popup article {
+            display: flex;
+            flex-direction: column;
+            width: 50vw;
+            margin: 4rem auto;
+            padding: 15px;
+            border-radius: 25px;
+            background-color: rgb(36, 41, 46);
+            
+        }
+
+        #luk{
+            position:fixed;
+            padding: 1em;
+            font-size: 1.7em;
+            font-weight: bolder;
+            color:rgb(202, 220, 223);
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PERSONGALLERI</h1>
+        <h2 id="filteroverskrift">Alle</h2>
+    </header>
+
+    <nav>
+        <button data-troende="alle" class="valgt">Alle</button>
+        <button data-troende="ja">Ja</button>
+        <button data-troende="nej">Nej</button>
+        <button data-troende="tvivler">Tvivler</button>
+    </nav>
+
+    <section>
+
+        <template>
+            <article class="person">
+                <h2></h2>
+                <img src="" alt="profilbillede">
+
+                <p class="titel"></p>
+                <p class="hobby"></p>
+            </article>
+        </template>
+    </section>
+
+    <section id="popup">
+
+        <div  id="luk"> &#9587; </div>
+        <article id="person">
+            
+            <h2></h2>
+            <img src="" alt="">
+            <p class="titel"></p>
+            <p class="email"></p>
+            <p class="hobby"></p>
+            <p class="fdag"></p>
+            
+
+        </article>
+
+    </section>
+
+    <script>
+        let popup = document.querySelector("#popup");
+        let section = document.querySelector("section");
+        let template = document.querySelector("template");
+        let personer;
+        const overskrift = document.querySelector("header h2");
+        let filter = "alle";
+
+        //url til restdb 
+        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+        const medieurl = "media/";
+
+        // min api key som skal bruges for at tilgå restdb
+        const options = {
+            headers: {
+                'x-apikey': "600fe9211346a1524ff12e31"
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", start)
+
+        // denne function udføres så snart dom er loaded
+        function start() {
+            const filterknapper = document.querySelectorAll("nav button");
+            filterknapper.forEach(knap => knap.addEventListener("click", filtrerPersoner))
+            hentData();
+
+        }
+
+        //henter min data ind fra json, vha restdb url + options)api key)
+        async function hentData() {
+            const jsonData = await fetch(url, options);
+            personer = await jsonData.json();
+            console.log(personer);
+            vis(personer); // kalder funktionen vis (personer)
+        }
+
+
+        function filtrerPersoner() {
+            //sætter filters værdi lig med værdien fra data af den knap der førte ind i funktionen
+            filter = this.dataset.troende;
+
+            //ændrer overskriften
+            if (filter == "alle") {
+                overskrift.textContent = this.textContent;
+            } else {
+                overskrift.textContent = `Troende: ${this.textContent}`;
+            }
+
+            //fjerner oog tilføjer valgt class til den rigtige knap
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt");
+
+            vis(personer);// kalder funktionen vis efter det nye filter er sat
+        }
+
+
+
+        // function der looper igennem personer hentet fra json
+        function vis(personer) {
+
+            section.textContent = " ";
+            personer.forEach(person => {
+
+                if (filter == person.troende || filter == "alle") {
+                    const klon = template.cloneNode(true).content;
+                    let navn = person.fornavn + " " + person.efternavn;
+
+
+                    klon.querySelector("img").src = medieurl + person.billede;
+                    klon.querySelector("h2").textContent = navn;
+                    klon.querySelector("p").textContent = "Titel: " + person.titel;
+                    klon.querySelector("p+p").textContent = "Hobby: " + person.hobby;
+                    klon.querySelector(".person").addEventListener("click", () => visDetaljer(person));
+                    section.appendChild(klon);
+                }
+
+
+            });
+
+        }
+
+
+
+        function visDetaljer(person) {
+            popup.style.display="block";
+            popup.querySelector("img").src= medieurl + person.billede;
+            popup.querySelector("h2").textContent= person.fornavn + " " + person.efternavn;
+            popup.querySelector(".titel").textContent = "Titel: " + person.titel;
+            popup.querySelector(".email").textContent = "Email: " + person.email;
+            popup.querySelector(".hobby").textContent = "Hobby: " + person.hobby;
+            popup.querySelector(".fdag").textContent = "Fødselsdag " + person.fødselsdag;
+
+        }
+
+        document.querySelector("#luk").addEventListener("click", () => popup.style.display="none");
+    </script>
+
+</body>
+
+</html>

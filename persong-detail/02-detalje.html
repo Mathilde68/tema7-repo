@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single-view</title>
+
+    <style>
+        section {
+            align-items: center;
+            align-content: center;
+        }
+
+        article {
+            border-radius: 8px 8px 8px 8px;
+            margin: 10px;
+            background-color: rgb(36, 41, 46);
+            max-width: 1000px;
+
+        }
+
+
+        h2 {
+            font-family: 'Franklin Gothic Medium';
+            font-size: 1.8rem;
+            text-align: center;
+            color: rgb(200, 222, 224);
+        }
+
+        p {
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            padding-left: 20px;
+            color: #9ec5d4;
+        }
+
+        img {
+            padding-bottom: 30px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+
+        <button> &larr; </button>
+
+
+        <article class="person">
+
+            <h2 class="navn"></h2>
+            <p class="køn"></p>
+            <img src="" alt="" class="profil-billede">
+        </article>
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+
+        let person;
+        const medieurl = "media/";
+
+        const options = {
+            headers: {
+                'x-apikey': "600fe9211346a1524ff12e31"
+            }
+        }
+
+        console.log("ID", id);
+        document.addEventListener("DOMContentLoaded", hentData);
+
+
+        async function hentData() {
+            const JSONData = await fetch(`https://persongalleri-5d3e.restdb.io/rest/persongalleri/${id}`, options
+            );
+
+            person = await JSONData.json();
+            console.log("Personen", person);
+            visPerson(person);
+        }
+
+        function visPerson() {
+            document.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
+            document.querySelector(".profil-billede").src = medieurl + person.billede;
+            document.querySelector("button").addEventListener("click", tilbage)
+        }
+
+        function tilbage() {
+            history.back();
+        }
+
+
+    </script>
+</body>
+
+</html>
