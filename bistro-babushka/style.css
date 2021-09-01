@@ -1,0 +1,49 @@
+img {
+    width: 100%;
+}
+
+#menuen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 1.5rem;
+    padding: 2rem;
+    margin: auto;
+    max-width: 1400px;
+}
+/*--------filtrering-----------*/
+.valgt{
+    background-color: #A84B52;
+}
+
+/*--------POPUP/Single view--------*/
+#popup {
+    overflow-y: scroll;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.856);
+    
+}
+
+#popup article {
+    display: flex;
+    flex-direction: column;
+    width: 45vw;
+    margin: 4rem auto;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: rgb(231, 226, 216);
+    
+}
+
+#luk{
+    position:fixed;
+    padding: 1em;
+    font-size: 1.7em;
+    font-weight: bolder;
+    color:rgb(255, 255, 255);
+    cursor:pointer;
+}
