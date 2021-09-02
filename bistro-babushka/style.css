@@ -2,37 +2,108 @@ img {
   border-radius: 0px 25px 25px 0px;
 }
 body {
+  margin: 0 auto;
+}
+main {
   background-color: #f1efef;
   margin: 0 auto;
   background-image: url(bg1.jpg);
   background-repeat: repeat;
   background-size: 100%;
 }
+
+#section1 {
+  background-image: url(front.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+
+#front {
+  background-color: rgba(20, 7, 7, 0.575);
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-family: script mt;
+  color: #f1f1f1f8;
+  font-weight: 700;
+  font-size: 4.1rem;
+
+  text-align: center;
+}
+
+#seMenu {
+  color: #a84b52;
+  align-self: center;
+  margin: 0;
+  width: 200px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#seMenu:hover{
+  color: #9b484f;
+  font-weight: bolder;
+}
 /*header*/
 header {
-    background-color: #f1efefbe;
+  width: 100vw;
+  background-color: #f1f1f1f8;
+
   margin: 0;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
+  position: fixed;
+  height: 7vh;
+}
+#logotitle {
+  display: flex;
+  flex-direction: row;
+}
+header #logo {
+  height: 45px;
+  margin: 8px;
+  border-radius: 0;
 }
 
-header #logo{
-    height: 7vh;
-    margin:10px;
+header h2 {
+  font-family: script mt;
+  margin-left: 10px;
+  margin-top: 8px;
+  color:#a84b52;
+  font-weight: 700;
+  font-size: 2.1rem;
 }
 
-header h2{
-    margin-left: 10px;
-    padding-top: 2px;
-    color:#9b484f;
-    font-weight: 700;
-    font-size: 2rem;
-}
+.menubutton {
+  border: none;
+  font-family: "Roboto Slab", serif;
+  font-weight: normal;
+  color: #6b5a5b;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  padding-top:20px;
+  background-color: none;
 
-h2 #bistro{
-    font-family: script mt;
-    font-size:2.1rem;
+}
+.menubutton:hover {
+  color: #a84b52;
+  font-weight: bolder;
 }
 /*loopview*/
 #menuen {
@@ -77,13 +148,13 @@ h2 #bistro{
 #filtersection {
   background-color: white;
   margin: 0;
-  padding-top: 20px;
   text-align: center;
+  padding-top: 7vh;
 }
 
 #filtersection nav {
- padding-bottom: 20px;
-  box-shadow: 0px 9px 6px 0px rgba(127,127,127,0.82);
+  padding-bottom: 15px;
+  box-shadow: 0px 9px 6px 0px rgba(127, 127, 127, 0.82);
 }
 .knap {
   background-color: white;
@@ -175,45 +246,24 @@ h2 #bistro{
 
 /*/*footer*/
 footer {
-    display: flex;
-    justify-content: space-between;
-    background-color:#f1efef;
-    text-align: center;
-    margin-top: 6rem;
+  display: flex;
+  justify-content: space-around;
+  background-color: #f1efef;
+  text-align: center;
+  margin-top: 6rem;
 }
 
 footer h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 footer p {
-    font-size: 0.9rem;
-    font-weight: 200;
-    margin: 25px;
-    color: #6b5a5b;
+  font-size: 0.9rem;
+  font-weight: 200;
+  margin: 25px;
+  color: #6b5a5b;
 }
-
-footer a {
-    text-decoration: none;
-    font-family: 'Roboto slab', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #6b5a5b;
-    margin-top: 30px;
-    padding-right: 10px;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: #a84b52;
-
-}
-
-footer .up {
-    padding: 65px 0px 0px 65px;
-}
-
 
 /*------------font------styling--------------*/
 h2 {
@@ -248,7 +298,7 @@ p {
   color: #6b5a5b;
 }
 
-.hover{
-background-color: #f1efef;
-    box-shadow: none;
+.hover {
+  background-color: #f1efef;
+  box-shadow: none;
 }
