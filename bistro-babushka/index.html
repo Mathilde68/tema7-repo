@@ -10,14 +10,31 @@
     <link
         href="https://www.dafontfree.net/embed/c2NyaXB0LW10LWJvbGQtcmVndWxhciZkYXRhLzI3L3MvMTQxOTQ5L1NjcmlwdE1UQm9sZC50dGY"
         rel="stylesheet" type="text/css" />
+    <link href="https://www.dafontfree.net/embed/cm9ja3dlbGwtY29uZGVuc2VkLWJvbGQmZGF0YS8yNy9yLzE0MDczOC9ST0NDQi50dGY"
+        rel="stylesheet" type="text/css" />
     <link href="https://www.dafontfree.net/embed/cm9ja3dlbGwtcmVndWxhciZkYXRhLzQ3L3IvNTUwNzcvcm9ja3dlbi50dGY"
         rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
+
+    <header id="header">
+        <img id="logo" src="babushka.png" alt="">
+        <h2> <span id="bistro">Bistro</span> Babushka</h2> 
+       
+    </header>
     <section id="filtersection">
-        <h2 id="filterNavn">Alle retter</h2>
+      <div> <h2 id="filterNavn">Alle retter</h2> </div> 
         <nav id="filter">
             <button data-kategori="alle" class="knap valgt">Alle retter</button>
             <button data-kategori="forretter" class="knap">Forretter</button>
@@ -28,33 +45,33 @@
 
         </nav>
 
-        
-     
+
+
 
     </section>
     <section id="menuen"></section>
 
     <template>
         <article class="retten">
-            <h2 class="navn"></h2>
-            <img src="" alt="" class="billede">
             <div class="om">
+                <h3 class="navn"></h3>
                 <p class="beskrivelse"></p>
-                <h3 class="pris"></h3>
+                <h3> <span class="pris"></span> <span class="dk">Kr.</span></h3>
             </div>
+            <img src="" alt="" class="billede">
         </article>
     </template>
 
     <section id="popup">
 
-     <div id="luk"> &#9587; </div>
+        <div id="luk"> &#9587; </div>
         <article id="ret">
 
             <h2 class="navn"></h2>
             <div class="info">
                 <p class="oprindelse"></p>
                 <p class="langbeskrivelse"></p>
-                <h3 class="pris"></h3>
+                <h3 id="beløb"> <span class="pris"></span> <span class="dk">Kr.</span></h3>
             </div>
             <img src="" alt="">
 
@@ -62,8 +79,26 @@
 
     </section>
 
+    <footer>
+        <div class="info" id="kontakt">
+            <h3>Kontakt:</h3>
+            <p>Telefon: +45 26 45 00 04</p>
+            <p>Email: babushka-matryoshka@bistro.com</p>
+            <p>Adresse: Lorem Vodkavej 24, 4000 Ipsum</p>
+        </div>
+
+        <div class="info" id="Åbning">
+            <h3>Åbningstider:</h3>
+            <p>Tirsdag - Fredag: 16:00 - 21:00</p>
+            <p>Lørdag - Søndag: 15:00 - 20:00</p>
+            <p>Mandag: lukket</p>
+        </div>
+        <div class="up"> <a id="up-button" href="#header">Til toppen</a> </div>
+
+    </footer>
+
     <script>
-          let popup = document.querySelector("#popup");
+        let popup = document.querySelector("#popup");
 
         let retter;
         const aktivFilter = document.querySelector("#filterNavn");
@@ -133,9 +168,10 @@
                     const klon = template.cloneNode(true).content;
                     klon.querySelector(".navn").textContent = ret.navn;
                     klon.querySelector("img").src = medieurl + ret.billednavn + "-md.jpg";
-                    klon.querySelector(".pris").textContent = ret.pris;
+                    klon.querySelector(".pris").textContent += ret.pris;
                     klon.querySelector(".beskrivelse").textContent = ret.kortbeskrivelse;
                     klon.querySelector(".retten").addEventListener("click", () => visDetaljer(ret));
+                    klon.querySelector(".retten").addEventListener("mouseover", hover);
 
 
                     destination.appendChild(klon);
@@ -144,19 +180,27 @@
             });
 
         }
+function hover(){
+    this.classList.add("hover");
+    this.addEventListener("mouseout", hoverOut);
+}
 
+function hoverOut(){
+    this.classList.remove("hover");
+    this.addEventListener("mouseover",hover);
+}
         function visDetaljer(ret) {
-            popup.style.display="block";
-            popup.querySelector("img").src= medieurl + ret.billednavn + "-md.jpg";
-            popup.querySelector("h2").textContent= ret.navn;
+            popup.style.display = "block";
+            popup.querySelector("img").src = medieurl + ret.billednavn + "-md.jpg";
+            popup.querySelector("h2").textContent = ret.navn;
             popup.querySelector(".oprindelse").textContent = "Oprindelse: " + ret.oprindelsesregion;
             popup.querySelector(".langbeskrivelse").textContent = ret.langbeskrivelse;
             popup.querySelector(".pris").textContent = ret.pris;
-          
+
 
         }
 
-        document.querySelector("#luk").addEventListener("click", () => popup.style.display="none");
+        document.querySelector("#luk").addEventListener("click", () => popup.style.display = "none");
 
     </script>
 

@@ -1,49 +1,254 @@
 img {
-    width: 100%;
+  border-radius: 0px 25px 25px 0px;
+}
+body {
+  background-color: #f1efef;
+  margin: 0 auto;
+  background-image: url(bg1.jpg);
+  background-repeat: repeat;
+  background-size: 100%;
+}
+/*header*/
+header {
+    background-color: #f1efefbe;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-#menuen {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    grid-gap: 1.5rem;
-    padding: 2rem;
-    margin: auto;
-    max-width: 1400px;
+header #logo{
+    height: 7vh;
+    margin:10px;
 }
+
+header h2{
+    margin-left: 10px;
+    padding-top: 2px;
+    color:#9b484f;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+h2 #bistro{
+    font-family: script mt;
+    font-size:2.1rem;
+}
+/*loopview*/
+#menuen {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  row-gap: 20px;
+  column-gap: 40px;
+  padding: 2rem;
+  margin: auto;
+  max-width: 1400px;
+}
+
+.om {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.retten {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 22vh;
+  padding-left: 20px;
+
+  background-color: #f8f7f6;
+  border-radius: 15px;
+  box-shadow: 0px 4px 5px 1px rgba(90, 90, 90, 0.397);
+
+  cursor: pointer;
+}
+
+.retten img {
+  width: 260px;
+  object-fit: cover;
+  object-position: 20% 50%;
+  border-radius: 0px 15px 15px 0px;
+}
+
 /*--------filtrering-----------*/
-.valgt{
-    background-color: #A84B52;
+#filtersection {
+  background-color: white;
+  margin: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#filtersection nav {
+ padding-bottom: 20px;
+  box-shadow: 0px 9px 6px 0px rgba(127,127,127,0.82);
+}
+.knap {
+  background-color: white;
+  border: none;
+  font-family: "Roboto Slab", serif;
+  font-weight: normal;
+  color: #6b5a5b;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.knap:hover {
+  background-color: #f1efef;
+}
+.valgt {
+  color: #a84b52;
+  font-weight: bolder;
 }
 
 /*--------POPUP/Single view--------*/
 #popup {
-    overflow-y: scroll;
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.856);
-    
+  overflow-y: scroll;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.856);
 }
 
 #popup article {
-    display: flex;
-    flex-direction: column;
-    width: 45vw;
-    margin: 4rem auto;
-    padding: 15px;
-    border-radius: 25px;
-    background-color: rgb(231, 226, 216);
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 45vw;
+  margin: 4rem auto;
+  padding: 15px;
+  border-radius: 25px;
+  background-color: #f8f7f6;
 }
 
-#luk{
-    position:fixed;
-    padding: 1em;
-    font-size: 1.7em;
-    font-weight: bolder;
-    color:rgb(255, 255, 255);
-    cursor:pointer;
+#ret img {
+  width: 100%;
+  border-radius: 0;
+}
+
+#luk {
+  position: fixed;
+  padding: 1em;
+  font-size: 1.7em;
+  font-weight: bolder;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+#ret .info {
+  padding-left: 5px;
+}
+
+#ret .navn {
+  margin: 0px;
+  padding-top: 5px;
+  font-size: 1.8rem;
+}
+
+#ret .oprindelse {
+  color: #a84b52;
+  padding-bottom: 20px;
+}
+
+#ret .langbeskrivelse {
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+#ret .dk {
+  color: #a84b52;
+  font-size: 1.5rem;
+}
+
+#ret .pris {
+  color: #a84b52;
+  font-size: 1.5rem;
+}
+
+/*/*footer*/
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color:#f1efef;
+    text-align: center;
+    margin-top: 6rem;
+}
+
+footer h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+footer p {
+    font-size: 0.9rem;
+    font-weight: 200;
+    margin: 25px;
+    color: #6b5a5b;
+}
+
+footer a {
+    text-decoration: none;
+    font-family: 'Roboto slab', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #6b5a5b;
+    margin-top: 30px;
+    padding-right: 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #a84b52;
+
+}
+
+footer .up {
+    padding: 65px 0px 0px 65px;
+}
+
+
+/*------------font------styling--------------*/
+h2 {
+  font-family: "rockwell", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #756163;
+}
+h3 {
+  font-family: "rockwell", serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #a84b52;
+}
+p {
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+  color: #6b5a5b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/*--pris-*/
+.dk {
+  color: #6b5a5b;
+  font-weight: lighter;
+}
+
+.pris {
+  font-family: rockwell;
+  font-style: condensed;
+  color: #6b5a5b;
+}
+
+.hover{
+background-color: #f1efef;
+    box-shadow: none;
 }
